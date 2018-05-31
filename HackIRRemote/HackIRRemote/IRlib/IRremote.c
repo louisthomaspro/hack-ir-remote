@@ -17,12 +17,12 @@
  * JVC and Panasonic protocol added by Kristian Lauszus (Thanks to zenwheel and other people at the original blog post)
  */
 
-//#include "IRremoteInt.h"
+#include "IRremoteInt.h"
 
 volatile irparams_t irparams;
 
 
-void ir_sendNECRepeatFrame(void)
+/*void ir_sendNECRepeatFrame(void)
 {
   ir_enableIROut(38);
   // Disable the Timer Interrupt (which is used for receiving IR) to avoid back coupling while sending
@@ -271,7 +271,7 @@ static void ir_mark(int time) {
   ir_delayMicroseconds(time);
 }
 
-/* Leave pin off for time (given in microseconds) */
+// Leave pin off for time (given in microseconds)
 static void ir_space(int time) {
   // Sends an IR space for the specified number of microseconds.
   // A space is no output, so the PWM output is disabled.
@@ -290,27 +290,22 @@ static void ir_enableIROut(int khz) {
   ir_pinMode(TIMER_PWM_PIN, OUTPUT);
   ir_digitalWrite(TIMER_PWM_PIN, LOW); // When not sending PWM, we want it low
   ir_timerCfgKhz(khz);
-}
+}*/
 
 // initialization
 void ir_enableIRIn(void) {
-  irparams.recvpin = IR_RECEIVE_PIN;
   irparams.blinkflag = 0;
   // initialize state machine variables
   irparams.rcvstate = STATE_IDLE;
   irparams.rawlen = 0;
   // set pin modes
-  ir_pinMode(irparams.recvpin, INPUT);
+  IR_RECEIVE_DDR &= ~(1<<IR_RECEIVE_PIN);
   
-  DISABLE_INTERRUPTS;
+  cli();
   // setup pulse clock timer interrupt for Timer
   ir_timerCfgNorm();
   ir_timerRst();
-
-  //Timer2 Overflow Interrupt Enable
-  TIMER_ENABLE_INTR;
-
-  ENABLE_INTERRUPTS;  // enable interrupts
+  sei();
 
 }
 
@@ -319,7 +314,7 @@ void ir_blink13(int blinkflag)
 {
   irparams.blinkflag = blinkflag;
   if (blinkflag)
-    ir_pinMode(BLINKLED_PIN, OUTPUT);
+    //ir_pinMode(BLINKLED_PIN, OUTPUT);
 }
 
 // TIMER interrupt code to collect raw data.
@@ -336,13 +331,11 @@ void ir_interruptService(void)
   unsigned char irdata = 0;
 
   // timer is used for sampling IR signal
-  if (TIMER_INT_FLAG == 1)
-  {
-    TIMER_INT_FLAG = 0;
 
     ir_timerRst();
 
-    irdata = (unsigned char)ir_digitalRead(irparams.recvpin);
+    //irdata = (unsigned char)ir_digitalRead(irparams.recvpin);
+	irdata = (IR_RECEIVE_PINx & ~(1<<IR_RECEIVE_PIN))>>IR_RECEIVE_PIN;
 
     irparams.timer++; // One more 50us tick
     if (irparams.rawlen >= RAWBUF) {
@@ -395,15 +388,14 @@ void ir_interruptService(void)
         break;
     }
 
-    if (irparams.blinkflag) {
+    /*if (irparams.blinkflag) {
         if (irdata == MARK) {
             BLINKLED_ON(); 
         } 
         else {
             BLINKLED_OFF(); 
         }
-    }
-  }
+    }*/
 }
 
 void ir_resume(void) {

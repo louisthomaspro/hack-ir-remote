@@ -122,13 +122,16 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="IRlib\IRremote.c">
+    <Compile Include="IRlib\IRremote.c">
       <SubType>compile</SubType>
-    </None>
+    </Compile>
     <Compile Include="IRlib\IRremote.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="IRlib\IRremoteInt.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="IRlib\usart.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="main.c">
