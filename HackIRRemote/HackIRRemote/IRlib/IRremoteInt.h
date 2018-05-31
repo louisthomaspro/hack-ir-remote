@@ -17,8 +17,6 @@
 #ifndef IRremoteint_h
 #define IRremoteint_h
 
-#include "p18f2550.h"
-
 #include "IRremote.h"
 
 

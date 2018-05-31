@@ -17,7 +17,7 @@
  * JVC and Panasonic protocol added by Kristian Lauszus (Thanks to zenwheel and other people at the original blog post)
  */
 
-#include "IRremoteInt.h"
+//#include "IRremoteInt.h"
 
 volatile irparams_t irparams;
 
