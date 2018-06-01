@@ -157,9 +157,9 @@ extern volatile irparams_t irparams;
 static void ir_timerCfgNorm(void);
 //static void ir_timerCfgKhz(unsigned char val);
 static void ir_timerRst(void);
-static void ir_enableIROut(int khz);
-static void ir_mark(int time);
-static void ir_space(int time);
+//static void ir_enableIROut(int khz);
+//static void ir_mark(int time);
+//static void ir_space(int time);
 static int ir_getRClevel(decode_results *results, int *offset, int *used, int t1);
 static long ir_decodeNEC(decode_results *results);
 static long ir_decodeSigma(decode_results *results);
@@ -209,7 +209,7 @@ static int MATCH_SPACE(int measured_ticks, int desired_us);
 
 #define USECPERTICK 50       // microseconds per clock interrupt tick
 
-#define IR_RECEIVE_PIN	6
+#define IR_RECEIVE_PIN	4
 #define IR_RECEIVE_PINx	PINB
 #define IR_RECEIVE_DDR	DDRB
 
@@ -223,16 +223,15 @@ static void ir_timerRst(void) {
     /*timer 3 for ir-receiving*/
     //TMR3H = (MAX_TMR_VAL - (USECPERTICK*(SYSCLOCK/US_PER_SEC)))/256;
     //TMR3L = (MAX_TMR_VAL - (USECPERTICK*(SYSCLOCK/US_PER_SEC)))%256;
-	TCNT4L=0;
-	TCNT4H=0;
+	TCNT0=0;
 }
 
 static void ir_timerCfgNorm(void) {
   /*timer 4A for ir-receiving*/
-  TCCR4A=0;
-  TCCR4B= 0b00001100; // /256
-  TIMSK4=0b00000010;
-  OCR4A=3; // division par 3
+  TCCR0A=0;
+  TCCR0B= 0b00001100; // /256
+  TIMSK0=0b00000010;
+  OCR0A=3; // division par 3
 }
 
 
@@ -266,10 +265,10 @@ static void ir_timerCfgNorm(void) {
     T1CONbits.TMR1ON = 0;// disable timer
 }*/
 
-static void ir_delay(unsigned long time)
+/*static void ir_delay(unsigned long time)
 {
     unsigned long i;
     for(i=0; i<time; i++) ir_delayMicroseconds(1000);
-}
+}*/
 
 #endif

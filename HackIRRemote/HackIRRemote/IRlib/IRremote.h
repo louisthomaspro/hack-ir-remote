@@ -16,6 +16,8 @@
 #ifndef IRremote_h
 #define IRremote_h
 
+#include <avr/interrupt.h>
+
 #define RAWBUF 100 // Length of raw duration buffer
 
 // Results returned from the decoder
@@ -81,6 +83,6 @@ extern void ir_sendDISH(unsigned long data, int nbits);
 extern void ir_sendSharp(unsigned long data, int nbits);
 extern void ir_sendPanasonic(unsigned int address, unsigned long data);
 extern void ir_sendJVC(unsigned long data, int nbits, int repeat); // *Note instead of sending the REPEAT constant if you want the JVC repeat signal sent, send the original code value and change the repeat argument from 0 to 1. JVC protocol repeats by skipping the header NOT by sending a separate code value like NEC does.
-extern void ir_delay(unsigned long time);
+//extern void ir_delay(unsigned long time);
 
 #endif

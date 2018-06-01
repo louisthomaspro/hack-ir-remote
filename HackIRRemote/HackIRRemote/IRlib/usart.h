@@ -9,10 +9,7 @@
 #ifndef USART_H_
 #define USART_H_
 
-void
- USART_Transmit( 
-unsigned char
- data )
+void USART_Transmit(unsigned char data)
 {
 /* 
 Wait for empty transmit buffer

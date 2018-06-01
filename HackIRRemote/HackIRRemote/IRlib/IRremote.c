@@ -313,7 +313,7 @@ void ir_enableIRIn(void) {
 void ir_blink13(int blinkflag)
 {
   irparams.blinkflag = blinkflag;
-  if (blinkflag)
+  //if (blinkflag)
     //ir_pinMode(BLINKLED_PIN, OUTPUT);
 }
 
@@ -335,7 +335,7 @@ void ir_interruptService(void)
     ir_timerRst();
 
     //irdata = (unsigned char)ir_digitalRead(irparams.recvpin);
-	irdata = (IR_RECEIVE_PINx & ~(1<<IR_RECEIVE_PIN))>>IR_RECEIVE_PIN;
+	irdata = (IR_RECEIVE_PINx & (1<<IR_RECEIVE_PIN))>>IR_RECEIVE_PIN;
 
     irparams.timer++; // One more 50us tick
     if (irparams.rawlen >= RAWBUF) {
@@ -1052,7 +1052,7 @@ i.e. use 0x1C10 instead of 0x0000000000001C10 which is listed in the
 linked LIRC file.
 */
 
-void ir_sendSharp(unsigned long data, int nbits) {
+/*void ir_sendSharp(unsigned long data, int nbits) {
   unsigned long invertdata = data ^ SHARP_TOGGLE_MASK;
   int i = 0;
   ir_enableIROut(38);
@@ -1104,7 +1104,7 @@ void ir_sendDISH(unsigned long data, int nbits)
     }
     data <<= 1;
   }
-}
+}*/
 
 
 static int MATCH(int measured, int desired)
