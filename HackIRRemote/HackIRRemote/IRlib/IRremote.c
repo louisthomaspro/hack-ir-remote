@@ -454,7 +454,7 @@ int ir_decode(decode_results *results) {
 }
 
 // NECs have a repeat only 4 items long
-static long ir_decodeNEC(decode_results *results) {
+/*static long ir_decodeNEC(decode_results *results) {
   int i = 0;
   long data = 0;
   int offset = 1; // Skip first space
@@ -501,7 +501,56 @@ static long ir_decodeNEC(decode_results *results) {
   results->value = data;
   results->decode_type = NEC;
   return DECODED;
+}*/
+static long ir_decodeNEC(decode_results *results) {
+	int i = 0;
+	long data = 0;
+	int offset = 1; // Skip first space
+	// Initial mark
+	if (!MATCH_MARK(results->rawbuf[offset], NEC_HDR_MARK)) {
+		return ERR;
+	}
+	offset++;
+	// Check for repeat
+	if (irparams.rawlen == 4 &&
+	MATCH_SPACE(results->rawbuf[offset], NEC_RPT_SPACE) &&
+	MATCH_MARK(results->rawbuf[offset+1], NEC_BIT_MARK)) {
+		results->bits = 0;
+		results->value = REPEAT;
+		results->decode_type = NEC;
+		return DECODED;
+	}
+	if (irparams.rawlen < 2 * NEC_BITS + 4) {
+		return ERR;
+	}
+	// Initial space
+	if (!MATCH_SPACE(results->rawbuf[offset], NEC_HDR_SPACE)) {
+		return ERR;
+	}
+	offset++;
+	for (i = 0; i < NEC_BITS; i++) {
+		if (!MATCH_MARK(results->rawbuf[offset], NEC_BIT_MARK)) {
+			return ERR;
+		}
+		offset++;
+		if (MATCH_SPACE(results->rawbuf[offset], NEC_ONE_SPACE)) {
+			data = (data << 1) | 1;
+		}
+		else if (MATCH_SPACE(results->rawbuf[offset], NEC_ZERO_SPACE)) {
+			data <<= 1;
+		}
+		else {
+			return ERR;
+		}
+		offset++;
+	}
+	// Success
+	results->bits = NEC_BITS;
+	results->value = data;
+	results->decode_type = NEC;
+	return DECODED;
 }
+
 
 
 // SIGMA ASC 333

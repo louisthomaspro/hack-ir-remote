@@ -38,7 +38,7 @@ int main(void)
 	    if (ir_decode(&dec_results)) {
 		    if (dec_results.decode_type == NEC)
 		    {
-			   PORTB ^= 0x80;
+			   PORTB ^= 0x10;
 		    }
 		    //do something here
 		    ir_resume(); // Receive the next value

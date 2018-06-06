@@ -25,7 +25,7 @@
 
 // Marks tend to be 100us too long, and spaces 100us too short
 // when received due to sensor lag.
-#define MARK_EXCESS 100
+#define MARK_EXCESS 0
 
 // Pulse parms are *50-100 for the Mark and *50+100 for the space
 // First MARK is the one after the long gap
