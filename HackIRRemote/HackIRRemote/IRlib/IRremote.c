@@ -22,7 +22,7 @@
 volatile irparams_t irparams;
 
 
-/*void ir_sendNECRepeatFrame(void)
+void ir_sendNECRepeatFrame(void)
 {
   ir_enableIROut(38);
   // Disable the Timer Interrupt (which is used for receiving IR) to avoid back coupling while sending
@@ -38,10 +38,10 @@ volatile irparams_t irparams;
 
 void ir_sendNEC(unsigned long data, int nbits)
 {
+	// Disable the Timer Interrupt (which is used for receiving IR) to avoid back coupling while sending
+  TIMER_DISABLE_INTR;
   int i = 0;
   ir_enableIROut(38);
-  // Disable the Timer Interrupt (which is used for receiving IR) to avoid back coupling while sending
-  TIMER_DISABLE_INTR;
 
   ir_mark(NEC_HDR_MARK);
   ir_space(NEC_HDR_SPACE);
@@ -268,6 +268,9 @@ static void ir_mark(int time) {
   // Sends an IR mark for the specified number of microseconds.
   // The mark output is modulated at the PWM frequency.
   TIMER_ENABLE_PWM; // Enable PWM output
+  TIMER_ENABLE_PWM;
+  TIMER_ENABLE_PWM;
+  TIMER_ENABLE_PWM;
   ir_delayMicroseconds(time);
 }
 
@@ -287,10 +290,10 @@ static void ir_enableIROut(int khz) {
   // To turn the output on and off, we leave the PWM running, but connect and disconnect the output pin.
   // A few hours staring at the Pic documentation and this will all make sense.
 
-  ir_pinMode(TIMER_PWM_PIN, OUTPUT);
-  ir_digitalWrite(TIMER_PWM_PIN, LOW); // When not sending PWM, we want it low
+  IR_SEND_DDR |= 1<<IR_SEND_PIN;
+  IR_SEND_PORT &= ~(1<<IR_SEND_PIN);
   ir_timerCfgKhz(khz);
-}*/
+}
 
 // initialization
 void ir_enableIRIn(void) {

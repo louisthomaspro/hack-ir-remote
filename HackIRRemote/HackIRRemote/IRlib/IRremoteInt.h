@@ -153,13 +153,13 @@ extern volatile irparams_t irparams;
 // internal Prototypes                                    //
 ////////////////////////////////////////////////////////////
 
-//static void ir_delayMicroseconds(int time);
+static void ir_delayMicroseconds(int time);
 static void ir_timerCfgNorm(void);
-//static void ir_timerCfgKhz(unsigned char val);
+static void ir_timerCfgKhz(unsigned char val);
 static void ir_timerRst(void);
-//static void ir_enableIROut(int khz);
-//static void ir_mark(int time);
-//static void ir_space(int time);
+static void ir_enableIROut(int khz);
+static void ir_mark(int time);
+static void ir_space(int time);
 static int ir_getRClevel(decode_results *results, int *offset, int *used, int t1);
 static long ir_decodeNEC(decode_results *results);
 static long ir_decodeSigma(decode_results *results);
@@ -189,12 +189,12 @@ static int MATCH_SPACE(int measured_ticks, int desired_us);
 
 // defines for timers
 #define MAX_TMR_VAL          255
-/*#define US_PER_SEC           1000000
-#define TIMER_ENABLE_PWM     (CCPR1L=half_pwm)
-#define TIMER_DISABLE_PWM    (CCPR1L=0)
-#define TIMER_ENABLE_INTR    (PIE2bits.TMR3IE=1)   
-#define TIMER_DISABLE_INTR   (PIE2bits.TMR3IE=0)
-#define TIMER_INT_FLAG       PIR2bits.TMR3IF
+//#define US_PER_SEC           1000000
+#define TIMER_ENABLE_PWM     (TCCR0A |= 0x40)
+#define TIMER_DISABLE_PWM    (TCCR0A &= ~(0x40))
+#define TIMER_ENABLE_INTR    (TIMSK0=0b00000010)   
+#define TIMER_DISABLE_INTR   (TIMSK0=0)
+/*#define TIMER_INT_FLAG       PIR2bits.TMR3IF
 #define TIMER_PWM_PIN        13
 #define DELAY_INT_FLAG       PIR1bits.TMR1IF
 #define DELAY_PRESCALE       4
@@ -212,9 +212,13 @@ static int MATCH_SPACE(int measured_ticks, int desired_us);
 
 #define USECPERTICK 50       // microseconds per clock interrupt tick
 
-#define IR_RECEIVE_PIN	4
-#define IR_RECEIVE_PINx	PINB
-#define IR_RECEIVE_DDR	DDRB
+#define IR_RECEIVE_PIN	(4)
+#define IR_RECEIVE_PINx	(PINB)
+#define IR_RECEIVE_DDR	(DDRB)
+
+#define IR_SEND_PIN (6)
+#define IR_SEND_DDR (DDRD)
+#define IR_SEND_PORT (PORTD)
 
 ////////////////////////////////////////////////////////////
 // PIC2550 hardware depending functions                   //
@@ -239,39 +243,32 @@ static void ir_timerCfgNorm(void) {
 
 
 static void ir_timerCfgKhz(unsigned char val) {
-  //const unsigned char pwmval = SYSCLOCK / 4000 / val;
-  //timer 2 in PWM mode for carrier freq during ir-sending
-  /*PIR1bits.TMR2IF=0;
-  IPR1bits.TMR2IP=1;
-  PIE1bits.TMR2IE=0;
-  PR2 = pwmval;
-  CCPR1L = 0;
-  half_pwm  = pwmval / 2;
-  CCP1CON = 0b00001100;
-  T2CON = 0x01;
-  T2CONbits.TMR2ON=1;*/
-  
-  
-  const uint8_t pwmval = SYSCLOCK / 2000 / (val);
-  TCCR2A = 0x01;
-  TCCR2B = 0x09;
-  OCR2A = pwmval;
-  OCR2B = pwmval / 3;
+  const uint8_t pwmval = (uint8_t)(SYSCLOCK / 2000UL / (38UL));
+  TIMSK0=0;
+  OCR0A = pwmval; 
+  TCCR0A = 0x42;
+  TCCR0B = 0x01; 
 }
 
-/*static void ir_delayMicroseconds(int time)
+static void ir_delayMicroseconds(int time)
 {
-    unsigned long tm_val = MAX_TMR_VAL - (time*DELAY_TICKS_PER_US);
+    //unsigned long tm_val = MAX_TMR_VAL - (time*DELAY_TICKS_PER_US);
 	
 	
-	const uint16_t pwmval = SYSCLOCK / 2000 / (val);
-	TCCR1A = 0x02;
-	TCCR1B = 0x11;
-	ICR1 = pwmval;
-	OCR1A = pwmval / 3;
+	
+	//const uint8_t pwmval = (uint8_t)((SYSCLOCK / 2UL / 8UL )*(time));
+	TCCR1B = 0x0;
+	TCNT1=0;
+	TIFR1 |= (1<<OCF1A);
+	OCR1A = time*2;
+	TCCR1A = 0x0;
+	TCCR1B = 0x0A;
+	//TIMSK1=0x02;
+	
+	while(!((TIFR1 & (1<<OCF1A))>>OCF1A));
 	
     //using timer 1 for a delay during ir-sending
-    T1CON = 0b10100100; //16bit timer using a prescale of 4
+   /* T1CON = 0b10100100; //16bit timer using a prescale of 4
     TMR1H = tm_val/256;
     TMR1L = tm_val%256;
     DELAY_INT_FLAG = 0;//clear interrupt flag
@@ -280,8 +277,8 @@ static void ir_timerCfgKhz(unsigned char val) {
     INTCONbits.GIEL = 1;//enable low prio
     T1CONbits.TMR1ON = 1;// start timer
     while(DELAY_INT_FLAG == 0){};//wait for timer interrupt flag
-    T1CONbits.TMR1ON = 0;// disable timer
-}*/
+    T1CONbits.TMR1ON = 0;// disable timer*/
+}
 
 /*static void ir_delay(unsigned long time)
 {

@@ -14,8 +14,8 @@
 
 int main(void)
 {
-	DDRB |= 0x21;
-	DDRD |=0x08;
+	//DDRB |= 1<<3;
+	//DDRD |= 1<<6;
 	 /*timer 4A for ir-receiving*/
 	 /*TCCR0A=0;
 	 TCCR0B= 0b00001100; // /256
@@ -23,15 +23,18 @@ int main(void)
 	 OCR0A=3; // division par 3
 	//sei();*/
 	decode_results dec_results;
-    ir_enableIRIn();
-    ir_blink13(0);
+    //ir_enableIRIn();
+    //ir_blink13(0);
 	
-	const uint8_t pwmval = (16000000UL / 2000UL / (38));
-	TCCR2A = 0x01;
-	TCCR2B = 0x09;
-	OCR2A = pwmval;
-	OCR2B = pwmval / 3;
-	TIMSK2=0x02;
+	//OCR2B = pwmval / 3;
+	//TIMSK2=0x02;
+	
+	ir_sendNEC(0x00FF20DF, 32);
+	
+	while (1)
+	{
+		ir_sendNEC(0x00FF20DF, 32);
+	}
 	
     while(1)
     {
