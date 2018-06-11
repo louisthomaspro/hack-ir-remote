@@ -180,13 +180,16 @@ static int MATCH_SPACE(int measured_ticks, int desired_us);
 // PIC2550 hardware depending defines                     //
 ////////////////////////////////////////////////////////////
 
-/*// cpu speed
-#define SYSCLOCK 12000000    // TCY - instructions per second of pic
+#ifdef F_CPU
+#	define SYSCLOCK  F_CPU     // main Arduino clock
+#else
+#	define SYSCLOCK  16000000  // main Arduino clock
+#endif
 
 
 // defines for timers
-#define MAX_TMR_VAL          65535
-#define US_PER_SEC           1000000
+#define MAX_TMR_VAL          255
+/*#define US_PER_SEC           1000000
 #define TIMER_ENABLE_PWM     (CCPR1L=half_pwm)
 #define TIMER_DISABLE_PWM    (CCPR1L=0)
 #define TIMER_ENABLE_INTR    (PIE2bits.TMR3IE=1)   
@@ -227,18 +230,18 @@ static void ir_timerRst(void) {
 }
 
 static void ir_timerCfgNorm(void) {
-  /*timer 4A for ir-receiving*/
+  /*timer 0 for ir-receiving*/
   TCCR0A=0;
-  TCCR0B= 0b00001100; // /256
+  TCCR0B=0b00001100; // /256
   TIMSK0=0b00000010;
   OCR0A=3; // division par 3
 }
 
 
-/*static void ir_timerCfgKhz(unsigned char val) {
-  const unsigned char pwmval = SYSCLOCK / 4000 / val;
+static void ir_timerCfgKhz(unsigned char val) {
+  //const unsigned char pwmval = SYSCLOCK / 4000 / val;
   //timer 2 in PWM mode for carrier freq during ir-sending
-  PIR1bits.TMR2IF=0;
+  /*PIR1bits.TMR2IF=0;
   IPR1bits.TMR2IP=1;
   PIE1bits.TMR2IE=0;
   PR2 = pwmval;
@@ -246,12 +249,27 @@ static void ir_timerCfgNorm(void) {
   half_pwm  = pwmval / 2;
   CCP1CON = 0b00001100;
   T2CON = 0x01;
-  T2CONbits.TMR2ON=1;
-}*/
+  T2CONbits.TMR2ON=1;*/
+  
+  
+  const uint8_t pwmval = SYSCLOCK / 2000 / (val);
+  TCCR2A = 0x01;
+  TCCR2B = 0x09;
+  OCR2A = pwmval;
+  OCR2B = pwmval / 3;
+}
 
 /*static void ir_delayMicroseconds(int time)
 {
     unsigned long tm_val = MAX_TMR_VAL - (time*DELAY_TICKS_PER_US);
+	
+	
+	const uint16_t pwmval = SYSCLOCK / 2000 / (val);
+	TCCR1A = 0x02;
+	TCCR1B = 0x11;
+	ICR1 = pwmval;
+	OCR1A = pwmval / 3;
+	
     //using timer 1 for a delay during ir-sending
     T1CON = 0b10100100; //16bit timer using a prescale of 4
     TMR1H = tm_val/256;
