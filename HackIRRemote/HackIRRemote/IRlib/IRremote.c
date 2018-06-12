@@ -282,7 +282,7 @@ static void ir_space(int time) {
   ir_delayMicroseconds(time);
 }
 
-static void ir_enableIROut(int khz) {
+static void ir_enableIROut(unsigned char khz) {
   // Enables IR output.  The khz value controls the modulation frequency in kilohertz.
   // This routine is designed for 36-40KHz; if you use it for other values, it's up to you
   // to make sure it gives reasonable results.  (Watch out for overflow / underflow / rounding.)

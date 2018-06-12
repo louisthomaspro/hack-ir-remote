@@ -16,7 +16,9 @@
 #ifndef IRremote_h
 #define IRremote_h
 
+#include "hardwareSpec.h"
 #include <avr/interrupt.h>
+
 
 #define RAWBUF 100 // Length of raw duration buffer
 

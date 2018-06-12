@@ -155,9 +155,9 @@ extern volatile irparams_t irparams;
 
 static void ir_delayMicroseconds(int time);
 static void ir_timerCfgNorm(void);
-static void ir_timerCfgKhz(unsigned char val);
+static void ir_timerCfgKhz(uint8_t val);
 static void ir_timerRst(void);
-static void ir_enableIROut(int khz);
+static void ir_enableIROut(unsigned char khz);
 static void ir_mark(int time);
 static void ir_space(int time);
 static int ir_getRClevel(decode_results *results, int *offset, int *used, int t1);
@@ -180,11 +180,7 @@ static int MATCH_SPACE(int measured_ticks, int desired_us);
 // PIC2550 hardware depending defines                     //
 ////////////////////////////////////////////////////////////
 
-#ifdef F_CPU
-#	define SYSCLOCK  F_CPU     // main Arduino clock
-#else
-#	define SYSCLOCK  16000000  // main Arduino clock
-#endif
+#define SYSCLOCK  F_CPU     // main Arduino clock
 
 
 // defines for timers
@@ -212,9 +208,9 @@ static int MATCH_SPACE(int measured_ticks, int desired_us);
 
 #define USECPERTICK 50       // microseconds per clock interrupt tick
 
-#define IR_RECEIVE_PIN	(4)
-#define IR_RECEIVE_PINx	(PINB)
-#define IR_RECEIVE_DDR	(DDRB)
+#define IR_RECEIVE_PIN	(7)
+#define IR_RECEIVE_PINx	(PIND)
+#define IR_RECEIVE_DDR	(DDRD)
 
 #define IR_SEND_PIN (6)
 #define IR_SEND_DDR (DDRD)
@@ -235,17 +231,17 @@ static void ir_timerRst(void) {
 
 static void ir_timerCfgNorm(void) {
   /*timer 0 for ir-receiving*/
-  TCCR0A=0;
-  TCCR0B=0b00001100; // /256
+  OCR0A=6; // division par 200
+  TCCR0A=0b00000010;
+  TCCR0B=0b00000011; // /256
   TIMSK0=0b00000010;
-  OCR0A=3; // division par 3
+  
 }
 
 
-static void ir_timerCfgKhz(unsigned char val) {
-  const uint8_t pwmval = (uint8_t)(SYSCLOCK / 2000UL / (38UL));
+static void ir_timerCfgKhz(uint8_t khz) {
   TIMSK0=0;
-  OCR0A = pwmval; 
+  OCR0A = (uint8_t)((float)SYSCLOCK / 2000.f / ((float)khz)); 
   TCCR0A = 0x42;
   TCCR0B = 0x01; 
 }
@@ -260,7 +256,7 @@ static void ir_delayMicroseconds(int time)
 	TCCR1B = 0x0;
 	TCNT1=0;
 	TIFR1 |= (1<<OCF1A);
-	OCR1A = time*2;
+	OCR1A = time;
 	TCCR1A = 0x0;
 	TCCR1B = 0x0A;
 	//TIMSK1=0x02;
