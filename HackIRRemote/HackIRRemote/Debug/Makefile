@@ -41,11 +41,17 @@ SUBDIRS :=  \
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
+../keyboard.c \
+../mainMenu.c \
+../spyRecMenu.c \
+../screen.c \
+../timer.c \
 ../i2chw/twimaster.c \
 ../IRlib/IRremote.c \
 ../lcdpcf8574/lcdpcf8574.c \
 ../main.c \
-../pcf8574/pcf8574.c
+../pcf8574/pcf8574.c \
+../systick.c
 
 
 PREPROCESSING_SRCS += 
@@ -55,32 +61,56 @@ ASM_SRCS +=
 
 
 OBJS +=  \
+keyboard.o \
+mainMenu.o \
+spyRecMenu.o \
+screen.o \
+timer.o \
 i2chw/twimaster.o \
 IRlib/IRremote.o \
 lcdpcf8574/lcdpcf8574.o \
 main.o \
-pcf8574/pcf8574.o
+pcf8574/pcf8574.o \
+systick.o
 
 OBJS_AS_ARGS +=  \
+keyboard.o \
+mainMenu.o \
+spyRecMenu.o \
+screen.o \
+timer.o \
 i2chw/twimaster.o \
 IRlib/IRremote.o \
 lcdpcf8574/lcdpcf8574.o \
 main.o \
-pcf8574/pcf8574.o
+pcf8574/pcf8574.o \
+systick.o
 
 C_DEPS +=  \
+keyboard.d \
+mainMenu.d \
+spyRecMenu.d \
+screen.d \
+timer.d \
 i2chw/twimaster.d \
 IRlib/IRremote.d \
 lcdpcf8574/lcdpcf8574.d \
 main.d \
-pcf8574/pcf8574.d
+pcf8574/pcf8574.d \
+systick.d
 
 C_DEPS_AS_ARGS +=  \
+keyboard.d \
+mainMenu.d \
+spyRecMenu.d \
+screen.d \
+timer.d \
 i2chw/twimaster.d \
 IRlib/IRremote.d \
 lcdpcf8574/lcdpcf8574.d \
 main.d \
-pcf8574/pcf8574.d
+pcf8574/pcf8574.d \
+systick.d
 
 OUTPUT_FILE_PATH +=HackIRRemote.elf
 
@@ -107,6 +137,25 @@ LINKER_SCRIPT_DEP+=
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+./%.o: .././%.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.150\include" -I"../i2chw" -I"../IRlib" -I"../lcdpcf8574" -I"../pcf8574" -I".."  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega328p -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.150\gcc\dev\atmega328p" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
 i2chw/%.o: ../i2chw/%.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
@@ -122,13 +171,6 @@ IRlib/%.o: ../IRlib/%.c
 	
 
 lcdpcf8574/%.o: ../lcdpcf8574/%.c
-	@echo Building file: $<
-	@echo Invoking: AVR/GNU C Compiler : 5.4.0
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.150\include" -I"../i2chw" -I"../IRlib" -I"../lcdpcf8574" -I"../pcf8574" -I".."  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega328p -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.150\gcc\dev\atmega328p" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
-	@echo Finished building: $<
-	
-
-./%.o: .././%.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.150\include" -I"../i2chw" -I"../IRlib" -I"../lcdpcf8574" -I"../pcf8574" -I".."  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega328p -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.150\gcc\dev\atmega328p" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

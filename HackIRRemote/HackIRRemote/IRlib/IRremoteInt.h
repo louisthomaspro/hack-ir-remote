@@ -19,6 +19,7 @@
 
 #include "IRremote.h"
 
+#include "timer.h"
 
 
 
@@ -210,11 +211,11 @@ static int MATCH_SPACE(int measured_ticks, int desired_us);
 
 #define IR_RECEIVE_PIN	(7)
 #define IR_RECEIVE_PINx	(PIND)
-#define IR_RECEIVE_DDR	(DDRD)
+#define IR_RECEIVE_DDRx	(DDRD)
 
 #define IR_SEND_PIN (6)
-#define IR_SEND_DDR (DDRD)
-#define IR_SEND_PORT (PORTD)
+#define IR_SEND_DDRx (DDRD)
+#define IR_SEND_PORTx (PORTD)
 
 ////////////////////////////////////////////////////////////
 // PIC2550 hardware depending functions                   //
@@ -231,6 +232,8 @@ static void ir_timerRst(void) {
 
 static void ir_timerCfgNorm(void) {
   /*timer 0 for ir-receiving*/
+  TIMSK0=0b00000000;
+  Timer0Mode = TIMER0_RECV;
   OCR0A=6; // division par 200
   TCCR0A=0b00000010;
   TCCR0B=0b00000011; // /256

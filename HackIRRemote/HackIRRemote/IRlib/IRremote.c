@@ -290,8 +290,8 @@ static void ir_enableIROut(unsigned char khz) {
   // To turn the output on and off, we leave the PWM running, but connect and disconnect the output pin.
   // A few hours staring at the Pic documentation and this will all make sense.
 
-  IR_SEND_DDR |= 1<<IR_SEND_PIN;
-  IR_SEND_PORT &= ~(1<<IR_SEND_PIN);
+  IR_SEND_DDRx |= 1<<IR_SEND_PIN;
+  IR_SEND_PORTx &= ~(1<<IR_SEND_PIN);
   ir_timerCfgKhz(khz);
 }
 
@@ -302,7 +302,7 @@ void ir_enableIRIn(void) {
   irparams.rcvstate = STATE_IDLE;
   irparams.rawlen = 0;
   // set pin modes
-  IR_RECEIVE_DDR &= ~(1<<IR_RECEIVE_PIN);
+  IR_RECEIVE_DDRx &= ~(1<<IR_RECEIVE_PIN);
   
   cli();
   // setup pulse clock timer interrupt for Timer
