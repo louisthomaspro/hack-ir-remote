@@ -41,8 +41,11 @@ SUBDIRS :=  \
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
+../eeprom.c \
 ../keyboard.c \
 ../mainMenu.c \
+../playMenu.c \
+../savedMenu.c \
 ../spyRecMenu.c \
 ../screen.c \
 ../timer.c \
@@ -61,8 +64,11 @@ ASM_SRCS +=
 
 
 OBJS +=  \
+eeprom.o \
 keyboard.o \
 mainMenu.o \
+playMenu.o \
+savedMenu.o \
 spyRecMenu.o \
 screen.o \
 timer.o \
@@ -74,8 +80,11 @@ pcf8574/pcf8574.o \
 systick.o
 
 OBJS_AS_ARGS +=  \
+eeprom.o \
 keyboard.o \
 mainMenu.o \
+playMenu.o \
+savedMenu.o \
 spyRecMenu.o \
 screen.o \
 timer.o \
@@ -87,8 +96,11 @@ pcf8574/pcf8574.o \
 systick.o
 
 C_DEPS +=  \
+eeprom.d \
 keyboard.d \
 mainMenu.d \
+playMenu.d \
+savedMenu.d \
 spyRecMenu.d \
 screen.d \
 timer.d \
@@ -100,8 +112,11 @@ pcf8574/pcf8574.d \
 systick.d
 
 C_DEPS_AS_ARGS +=  \
+eeprom.d \
 keyboard.d \
 mainMenu.d \
+playMenu.d \
+savedMenu.d \
 spyRecMenu.d \
 screen.d \
 timer.d \
@@ -126,6 +141,12 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
+
+
+
+
+
+
 
 
 

@@ -126,7 +126,7 @@
 #define STATE_SPACE    4
 #define STATE_STOP     5
 
-// IR detector output is active low
+// IR detector output is active high
 #define MARK  1
 #define SPACE 0
 #define LOW 0
@@ -181,7 +181,7 @@ static int MATCH_SPACE(int measured_ticks, int desired_us);
 // PIC2550 hardware depending defines                     //
 ////////////////////////////////////////////////////////////
 
-#define SYSCLOCK  F_CPU     // main Arduino clock
+#define SYSCLOCK  F_CPU     // main clock
 
 
 // defines for timers
@@ -232,8 +232,6 @@ static void ir_timerRst(void) {
 
 static void ir_timerCfgNorm(void) {
   /*timer 0 for ir-receiving*/
-  TIMSK0=0b00000000;
-  Timer0Mode = TIMER0_RECV;
   OCR0A=6; // division par 200
   TCCR0A=0b00000010;
   TCCR0B=0b00000011; // /256

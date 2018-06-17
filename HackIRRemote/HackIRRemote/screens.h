@@ -10,10 +10,14 @@
 #define SCREENS_H_
 
 #include <stdlib.h>
+#include <stdio.h>
 #include <stdint.h>
 #include <string.h>
 #include "lcdpcf8574.h"
 #include "keyboard.h"
+#include "IRremote.h"
+#include "eeprom.h"
+#include "systick.h"
 
 extern char ScreenBuf[2][17];
 extern uint8_t Refresh;
@@ -24,12 +28,17 @@ extern void (*updatePtr)(void);
 
 
 uint8_t updateIndex(uint8_t *index, uint8_t maxItem);
+void displayProtocol(decode_results *dec_results);
 void render();
 
-//Main menu
+//Main Menu
 void updateMain();
-//Rec/play
+//Spy/Rec Menu
 void updateSpyRec();
+//Saved
+void updateSaved();
+//play Menu
+void updatePlay();
 
 
 #endif /* SCREENS_H_ */

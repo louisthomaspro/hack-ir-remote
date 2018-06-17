@@ -2,9 +2,15 @@
 # Automatically-generated file. Do not edit or delete the file
 ################################################################################
 
+eeprom.c
+
 keyboard.c
 
 mainMenu.c
+
+playMenu.c
+
+savedMenu.c
 
 spyRecMenu.c
 

@@ -32,7 +32,7 @@ void ir_sendNECRepeatFrame(void)
   ir_mark(NEC_BIT_MARK);
   ir_space(0);
   // Enable the Timer Interrupt again (which is used for receiving IR)
-  TIMER_ENABLE_INTR;
+  //TIMER_ENABLE_INTR;
 }
 
 
@@ -59,10 +59,10 @@ void ir_sendNEC(unsigned long data, int nbits)
   ir_mark(NEC_BIT_MARK);
   ir_space(0);
   // Enable the Timer Interrupt again (which is used for receiving IR)
-  TIMER_ENABLE_INTR;
+  //TIMER_ENABLE_INTR;
 }
 
-void sendSony(unsigned long data, int nbits) {
+void ir_sendSony(unsigned long data, int nbits) {
   int i = 0;
   ir_enableIROut(40);
   // Disable the Timer Interrupt (which is used for receiving IR) to avoid back coupling while sending
@@ -82,7 +82,7 @@ void sendSony(unsigned long data, int nbits) {
     data <<= 1;
   }
   // Enable the Timer Interrupt again (which is used for receiving IR)
-  TIMER_ENABLE_INTR;
+  //TIMER_ENABLE_INTR;
 }
 
 void ir_sendSigma(unsigned long data, int nbits) {
@@ -118,7 +118,7 @@ void ir_sendSigma(unsigned long data, int nbits) {
   ir_mark(SIGMA_BIT_MARK);
   ir_space(0);
   // Enable the Timer Interrupt again (which is used for receiving IR)
-  TIMER_ENABLE_INTR;
+  //TIMER_ENABLE_INTR;
 }
 
 void ir_sendRaw(unsigned int buf[], int len, int hz)
@@ -137,11 +137,11 @@ void ir_sendRaw(unsigned int buf[], int len, int hz)
   }
   ir_space(0); // Just to be sure
   // Enable the Timer Interrupt again (which is used for receiving IR)
-  TIMER_ENABLE_INTR;
+  //TIMER_ENABLE_INTR;
 }
 
 // Note: first bit must be a one (start bit)
-void sendRC5(unsigned long data, int nbits)
+void ir_sendRC5(unsigned long data, int nbits)
 {
   int i = 0;
   ir_enableIROut(36);
@@ -164,11 +164,11 @@ void sendRC5(unsigned long data, int nbits)
   }
   ir_space(0); // Turn off at end
   // Enable the Timer Interrupt again (which is used for receiving IR)
-  TIMER_ENABLE_INTR;
+  //TIMER_ENABLE_INTR;
 }
 
 // Caller needs to take care of flipping the toggle bit
-void sendRC6(unsigned long data, int nbits)
+void ir_sendRC6(unsigned long data, int nbits)
 {
   int t = 0;
   int i = 0;
@@ -202,9 +202,9 @@ void sendRC6(unsigned long data, int nbits)
   }
   ir_space(0); // Turn off at end
   // Enable the Timer Interrupt again (which is used for receiving IR)
-  TIMER_ENABLE_INTR;
+  //TIMER_ENABLE_INTR;
 }
-void sendPanasonic(unsigned int address, unsigned long data) {
+void ir_sendPanasonic(unsigned int address, unsigned long data) {
     int i=0;
     ir_enableIROut(35);
     // Disable the Timer Interrupt (which is used for receiving IR) to avoid back coupling while sending
@@ -234,9 +234,9 @@ void sendPanasonic(unsigned int address, unsigned long data) {
     ir_mark(PANASONIC_BIT_MARK);
     ir_space(0);
     // Enable the Timer Interrupt again (which is used for receiving IR)
-    TIMER_ENABLE_INTR;
+    //TIMER_ENABLE_INTR;
 }
-void sendJVC(unsigned long data, int nbits, int repeat)
+void ir_sendJVC(unsigned long data, int nbits, int repeat)
 {
     int i = 0;
     ir_enableIROut(38);
@@ -261,7 +261,7 @@ void sendJVC(unsigned long data, int nbits, int repeat)
     ir_mark(JVC_BIT_MARK);
     ir_space(0);
     // Enable the Timer Interrupt again (which is used for receiving IR)
-    TIMER_ENABLE_INTR;
+    //TIMER_ENABLE_INTR;
 }
 
 static void ir_mark(int time) {
@@ -456,55 +456,7 @@ int ir_decode(decode_results *results) {
   return ERR;
 }
 
-// NECs have a repeat only 4 items long
-/*static long ir_decodeNEC(decode_results *results) {
-  int i = 0;
-  long data = 0;
-  int offset = 1; // Skip first space
-  // Initial mark
-  if (!MATCH_MARK(results->rawbuf[offset], NEC_HDR_MARK)) {
-    return ERR;
-  }
-  offset++;
-  // Check for repeat
-  if (irparams.rawlen == 4 &&
-    MATCH_SPACE(results->rawbuf[offset], NEC_RPT_SPACE) &&
-    MATCH_MARK(results->rawbuf[offset+1], NEC_BIT_MARK)) {
-    results->bits = 0;
-    results->value = REPEAT;
-    results->decode_type = NEC;
-    return DECODED;
-  }
-  if (irparams.rawlen < 2 * NEC_BITS + 4) {
-    return ERR;
-  }
-  // Initial space  
-  if (!MATCH_SPACE(results->rawbuf[offset], NEC_HDR_SPACE)) {
-    return ERR;
-  }
-  offset++;
-  for (i = 0; i < NEC_BITS; i++) {
-    if (!MATCH_MARK(results->rawbuf[offset], NEC_BIT_MARK)) {
-      return ERR;
-    }
-    offset++;
-    if (MATCH_SPACE(results->rawbuf[offset], NEC_ONE_SPACE)) {
-      data = (data << 1) | 1;
-    } 
-    else if (MATCH_SPACE(results->rawbuf[offset], NEC_ZERO_SPACE)) {
-      data <<= 1;
-    } 
-    else {
-      return ERR;
-    }
-    offset++;
-  }
-  // Success
-  results->bits = NEC_BITS;
-  results->value = data;
-  results->decode_type = NEC;
-  return DECODED;
-}*/
+
 static long ir_decodeNEC(decode_results *results) {
 	int i = 0;
 	long data = 0;

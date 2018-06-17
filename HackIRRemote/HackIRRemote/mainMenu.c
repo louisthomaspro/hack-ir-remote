@@ -19,6 +19,10 @@ void updateMain()
 	char *customStr = "Custom";
 	
 	Refresh|=updateIndex(&index, NB_ITEM_MAINMENU);
+	
+	if(ChangedScreen)
+		Refresh=1;
+		
 	switch(index)
 	{
 		case 0:
@@ -39,8 +43,7 @@ void updateMain()
 			ScreenBuf[0][0] = '>';
 			strcpy(ScreenBuf[0]+1, customStr);
 			
-			for(uint8_t i=0; i<16; i++)
-				ScreenBuf[1][i]=' ';
+			ScreenBuf[1][0]='\0';
 			break;
 		default:
 			break;
@@ -50,6 +53,9 @@ void updateMain()
 	{
 		switch(index)
 		{
+			case 0:
+				updatePtr=updatePlay;
+				break;
 			case 1:
 				updatePtr=updateSpyRec;
 				break;

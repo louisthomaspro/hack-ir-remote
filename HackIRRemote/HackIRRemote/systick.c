@@ -11,12 +11,10 @@ volatile uint16_t SysTick = 0;
 
 void initSysTick()
 {
-	TIMSK0=0b00000000;
-	Timer0Mode = TIMER0_SYSTICK;
-	OCR0A=78; // division par 78
-	TCCR0A=0b00000010;
-	TCCR0B=0b00000101; // /1024
-	TIMSK0=0b00000010;
+	OCR2A=78; // division par 78
+	TCCR2A=0b00000010;
+	TCCR2B=0b00000111; // /1024
+	TIMSK2=0b00000010;
 	// Génère une interruption toutes les 9.98 ms
 }
 void incSysTick()

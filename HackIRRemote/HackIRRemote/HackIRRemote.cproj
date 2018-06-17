@@ -191,6 +191,12 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="eeprom.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="eeprom.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="keyboard.c">
       <SubType>compile</SubType>
     </Compile>
@@ -198,6 +204,12 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="mainMenu.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="playMenu.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="SavedMenu.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="spyRecMenu.c">

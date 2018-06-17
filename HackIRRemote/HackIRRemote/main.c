@@ -33,14 +33,13 @@ int main(void)
 	marqueTime16(&keyboardRef);
 	while(1)
 	{
-		//if(elapsedTime16(&keyboardRef)>2) // 20ms
-		//{
+		if(elapsedTime16(&keyboardRef)>2) // 20ms
+		{
 			processKeyboard();
-		//	marqueTime16(&keyboardRef);
-		//}
+			marqueTime16(&keyboardRef);
+		}
 		if(ChangedScreen)
 		{
-			Refresh=1;
 			updatePtr();
 			ChangedScreen=0;
 		}
@@ -55,16 +54,10 @@ int main(void)
 
 ISR(TIMER0_COMPA_vect)
 {
-	switch(Timer0Mode)
-	{
-		case TIMER0_RECV:
-			ir_interruptService();
-			break;
-		case TIMER0_SYSTICK:
-			incSysTick();
-			break;
-		default:
-			break;			
-	}
+	ir_interruptService();
+}
+ISR(TIMER2_COMPA_vect)
+{
+	incSysTick();
 }
 
