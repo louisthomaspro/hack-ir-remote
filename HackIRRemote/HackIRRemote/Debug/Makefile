@@ -45,7 +45,7 @@ C_SRCS +=  \
 ../keyboard.c \
 ../mainMenu.c \
 ../playMenu.c \
-../savedMenu.c \
+../SavedMenu.c \
 ../spyRecMenu.c \
 ../screen.c \
 ../timer.c \
@@ -68,7 +68,7 @@ eeprom.o \
 keyboard.o \
 mainMenu.o \
 playMenu.o \
-savedMenu.o \
+SavedMenu.o \
 spyRecMenu.o \
 screen.o \
 timer.o \
@@ -84,7 +84,7 @@ eeprom.o \
 keyboard.o \
 mainMenu.o \
 playMenu.o \
-savedMenu.o \
+SavedMenu.o \
 spyRecMenu.o \
 screen.o \
 timer.o \
@@ -100,7 +100,7 @@ eeprom.d \
 keyboard.d \
 mainMenu.d \
 playMenu.d \
-savedMenu.d \
+SavedMenu.d \
 spyRecMenu.d \
 screen.d \
 timer.d \
@@ -116,7 +116,7 @@ eeprom.d \
 keyboard.d \
 mainMenu.d \
 playMenu.d \
-savedMenu.d \
+SavedMenu.d \
 spyRecMenu.d \
 screen.d \
 timer.d \

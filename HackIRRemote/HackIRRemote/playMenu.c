@@ -21,7 +21,8 @@ void updatePlay()
 	switch(PressedKeyCode)
 	{
 		case KEY_0:
-			getCode(&dec_results, 0);
+			ir_sendNEC(0xC1AA59A6, NEC_BITS);
+			//getCode(&dec_results, 0);
 			break;
 		case KEY_1:
 			getCode(&dec_results, 1);
@@ -71,6 +72,7 @@ void playCode(decode_results *dec_results)
 	switch(dec_results->decode_type)
 	{
 		case NEC:
+		case NEC_EXT:
 			ir_sendNEC(dec_results->value, dec_results->bits);
 			break;
 		case RC5:

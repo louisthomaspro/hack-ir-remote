@@ -36,15 +36,15 @@ void processKeyboard()
 		case KEY_ASTERISK:
 		case KEY_0:
 		case KEY_HASH:
-			if(PrevKeyCode!=keyCode)
+			if(PrevKeyCode!=keyCode) // detection d'un appui
 				PressedKeyCode=keyCode;
 			break;
 		default:
 			keyCode=KEY_NONE;
-			if(PrevKeyCode!=keyCode)
+			if(PrevKeyCode!=keyCode)// detection d'un relachement
 				ReleasedKeyCode=PrevKeyCode;
 	}
-	if(PressedKeyCode==ReleasedKeyCode)
+	if(PressedKeyCode==ReleasedKeyCode)// Une touche ne peut être appuyée et relachée en même temps ...
 		PressedKeyCode=0;
 		
 	PrevKeyCode=keyCode;

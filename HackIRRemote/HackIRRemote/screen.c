@@ -63,6 +63,14 @@ void displayProtocol(decode_results *dec_results)
 			else
 				sprintf(ScreenBuf[1], "Repeat code");
 			break;
+		case NEC_EXT:
+			strcpy(ScreenBuf[0]+strlen(typeStr), "NEC_E");
+			sprintf(ScreenBuf[0], "%s %s", ScreenBuf[0], addrStr);
+			if(dec_results->value!=REPEAT)
+				sprintf(ScreenBuf[1], "x%04X %sx%02X", (uint16_t)((dec_results->value&0xFFFF0000)>>16), cmdStr, (uint8_t)((dec_results->value&0xFF00)>>8));
+			else
+				sprintf(ScreenBuf[1], "Repeat code");
+			break;
 		case RC5:
 			strcpy(ScreenBuf[0]+strlen(typeStr), "RC5");
 			sprintf(ScreenBuf[1], "%sx%02X %sx%02X", addrStr, (uint8_t)((dec_results->value&0x7C0)>>6), cmdStr, (uint8_t)(dec_results->value&0x3F));

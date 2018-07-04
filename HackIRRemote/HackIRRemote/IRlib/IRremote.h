@@ -44,6 +44,7 @@ typedef struct {
 #define SANYO 9
 #define MITSUBISHI 10
 #define SIGMA 11
+#define NEC_EXT 12
 #define UNKNOWN -1
 
 //Bit length of the protocolls

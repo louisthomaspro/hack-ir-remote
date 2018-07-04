@@ -19,16 +19,18 @@
 #include "eeprom.h"
 #include "systick.h"
 
-extern char ScreenBuf[2][17];
-extern uint8_t Refresh;
-extern uint8_t ChangedScreen;
+extern char ScreenBuf[2][17]; // Back buffer de l'écran 2*(16+1 pour le carctère '\0')
+extern uint8_t Refresh; // Flag global de mise à jour de l'écran
+extern uint8_t ChangedScreen; // Flag global qui indique le changement de menu
 
 
-extern void (*updatePtr)(void);
+extern void (*updatePtr)(void); // Pointeur de fonction global
 
-
+// détermine le nouvel index qui sert à la selection d'un item d'un menu
 uint8_t updateIndex(uint8_t *index, uint8_t maxItem);
+// Fonction qui sert à afficher un protocole
 void displayProtocol(decode_results *dec_results);
+// Fonction de mise à jour de l'écran
 void render();
 
 //Main Menu

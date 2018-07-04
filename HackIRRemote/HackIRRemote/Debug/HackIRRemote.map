@@ -94,9 +94,9 @@ Discarded input sections
  .text          0x00000000        0x0 playMenu.o
  .data          0x00000000        0x0 playMenu.o
  .bss           0x00000000        0x0 playMenu.o
- .text          0x00000000        0x0 savedMenu.o
- .data          0x00000000        0x0 savedMenu.o
- .bss           0x00000000        0x0 savedMenu.o
+ .text          0x00000000        0x0 SavedMenu.o
+ .data          0x00000000        0x0 SavedMenu.o
+ .bss           0x00000000        0x0 SavedMenu.o
  .text          0x00000000        0x0 spyRecMenu.o
  .data          0x00000000        0x0 spyRecMenu.o
  .bss           0x00000000        0x0 spyRecMenu.o
@@ -402,7 +402,7 @@ LOAD eeprom.o
 LOAD keyboard.o
 LOAD mainMenu.o
 LOAD playMenu.o
-LOAD savedMenu.o
+LOAD SavedMenu.o
 LOAD spyRecMenu.o
 LOAD screen.o
 LOAD timer.o
@@ -519,7 +519,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000     0x3460
+.text           0x00000000     0x3606
  *(.vectors)
  .vectors       0x00000000       0x68 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.150/gcc/dev/atmega328p/avr5/crtatmega328p.o
                 0x00000000                __vector_default
@@ -611,314 +611,317 @@ END GROUP
                 0x00000204                . = ALIGN (0x2)
  *(.text.*)
  .text.saveCode
-                0x00000204      0x1c8 eeprom.o
+                0x00000204      0x214 eeprom.o
                 0x00000204                saveCode
- .text.getCode  0x000003cc      0x1c0 eeprom.o
-                0x000003cc                getCode
+ .text.getCode  0x00000418      0x236 eeprom.o
+                0x00000418                getCode
  .text.clearKeys
-                0x0000058c        0xa keyboard.o
-                0x0000058c                clearKeys
+                0x0000064e        0xa keyboard.o
+                0x0000064e                clearKeys
  .text.setKeyboardPhase1
-                0x00000596       0x1a keyboard.o
-                0x00000596                setKeyboardPhase1
+                0x00000658       0x1a keyboard.o
+                0x00000658                setKeyboardPhase1
  .text.setKeyboardPhase2
-                0x000005b0       0x1a keyboard.o
-                0x000005b0                setKeyboardPhase2
+                0x00000672       0x1a keyboard.o
+                0x00000672                setKeyboardPhase2
  .text.readKeyboardPhase1
-                0x000005ca        0x6 keyboard.o
-                0x000005ca                readKeyboardPhase1
+                0x0000068c        0x6 keyboard.o
+                0x0000068c                readKeyboardPhase1
  .text.readKeyboardPhase2
-                0x000005d0        0x6 keyboard.o
-                0x000005d0                readKeyboardPhase2
+                0x00000692        0x6 keyboard.o
+                0x00000692                readKeyboardPhase2
  .text.processKeyboard
-                0x000005d6       0x5c keyboard.o
-                0x000005d6                processKeyboard
+                0x00000698       0x5c keyboard.o
+                0x00000698                processKeyboard
  .text.updateMain
-                0x00000632       0xec mainMenu.o
-                0x00000632                updateMain
+                0x000006f4       0xec mainMenu.o
+                0x000006f4                updateMain
  .text.playCode
-                0x0000071e       0x52 playMenu.o
-                0x0000071e                playCode
+                0x000007e0       0x5a playMenu.o
+                0x000007e0                playCode
  .text.updatePlay
-                0x00000770      0x114 playMenu.o
-                0x00000770                updatePlay
+                0x0000083a      0x11c playMenu.o
+                0x0000083a                updatePlay
  .text.updateSaved
-                0x00000884       0x4e savedMenu.o
-                0x00000884                updateSaved
- .text.spy      0x000008d2      0x15e spyRecMenu.o
-                0x000008d2                spy
+                0x00000956       0x4e SavedMenu.o
+                0x00000956                updateSaved
+ .text.detectNEC_ext
+                0x000009a4       0x16 spyRecMenu.o
+                0x000009a4                detectNEC_ext
+ .text.spy      0x000009ba      0x168 spyRecMenu.o
+                0x000009ba                spy
  .text.updateSpyRec
-                0x00000a30       0x54 spyRecMenu.o
-                0x00000a30                updateSpyRec
+                0x00000b22       0x54 spyRecMenu.o
+                0x00000b22                updateSpyRec
  .text.updateIndex
-                0x00000a84       0x4a screen.o
-                0x00000a84                updateIndex
- .text.render   0x00000ace       0x2e screen.o
-                0x00000ace                render
+                0x00000b76       0x4a screen.o
+                0x00000b76                updateIndex
+ .text.render   0x00000bc0       0x2e screen.o
+                0x00000bc0                render
  .text.displayProtocol
-                0x00000afc      0x2ae screen.o
-                0x00000afc                displayProtocol
+                0x00000bee      0x362 screen.o
+                0x00000bee                displayProtocol
  .text.i2c_init
-                0x00000daa        0xc i2chw/twimaster.o
-                0x00000daa                i2c_init
+                0x00000f50        0xc i2chw/twimaster.o
+                0x00000f50                i2c_init
  .text.i2c_start
-                0x00000db6       0x4c i2chw/twimaster.o
-                0x00000db6                i2c_start
+                0x00000f5c       0x4c i2chw/twimaster.o
+                0x00000f5c                i2c_start
  .text.i2c_stop
-                0x00000e02       0x10 i2chw/twimaster.o
-                0x00000e02                i2c_stop
+                0x00000fa8       0x10 i2chw/twimaster.o
+                0x00000fa8                i2c_stop
  .text.i2c_write
-                0x00000e12       0x24 i2chw/twimaster.o
-                0x00000e12                i2c_write
+                0x00000fb8       0x24 i2chw/twimaster.o
+                0x00000fb8                i2c_write
  .text.i2c_readNak
-                0x00000e36       0x14 i2chw/twimaster.o
-                0x00000e36                i2c_readNak
+                0x00000fdc       0x14 i2chw/twimaster.o
+                0x00000fdc                i2c_readNak
  .text.ir_timerRst
-                0x00000e4a        0x4 IRlib/IRremote.o
+                0x00000ff0        0x4 IRlib/IRremote.o
  .text.ir_timerCfgNorm
-                0x00000e4e       0x12 IRlib/IRremote.o
+                0x00000ff4       0x12 IRlib/IRremote.o
  .text.ir_timerCfgKhz
-                0x00000e60       0x30 IRlib/IRremote.o
+                0x00001006       0x30 IRlib/IRremote.o
  .text.ir_delayMicroseconds
-                0x00000e90       0x2c IRlib/IRremote.o
- .text.ir_mark  0x00000ebc       0x1c IRlib/IRremote.o
+                0x00001036       0x2c IRlib/IRremote.o
+ .text.ir_mark  0x00001062       0x1c IRlib/IRremote.o
  .text.ir_space
-                0x00000ed8        0xa IRlib/IRremote.o
+                0x0000107e        0xa IRlib/IRremote.o
  .text.ir_enableIROut
-                0x00000ee2       0x10 IRlib/IRremote.o
+                0x00001088       0x10 IRlib/IRremote.o
  .text.ir_compare
-                0x00000ef2       0x92 IRlib/IRremote.o
+                0x00001098       0x92 IRlib/IRremote.o
  .text.ir_decodeHash
-                0x00000f84       0xd2 IRlib/IRremote.o
- .text.MATCH    0x00001056       0x90 IRlib/IRremote.o
+                0x0000112a       0xd2 IRlib/IRremote.o
+ .text.MATCH    0x000011fc       0x90 IRlib/IRremote.o
  .text.ir_getRClevel
-                0x000010e6       0xd0 IRlib/IRremote.o
+                0x0000128c       0xd0 IRlib/IRremote.o
  .text.ir_decodeRC5
-                0x000011b6      0x174 IRlib/IRremote.o
+                0x0000135c      0x174 IRlib/IRremote.o
  .text.MATCH_MARK
-                0x0000132a        0x4 IRlib/IRremote.o
+                0x000014d0        0x4 IRlib/IRremote.o
  .text.MATCH_SPACE
-                0x0000132e        0x4 IRlib/IRremote.o
+                0x000014d4        0x4 IRlib/IRremote.o
  .text.ir_decodeSigma
-                0x00001332      0x1b0 IRlib/IRremote.o
+                0x000014d8      0x1b0 IRlib/IRremote.o
  .text.ir_decodeNEC
-                0x000014e2      0x18c IRlib/IRremote.o
+                0x00001688      0x18c IRlib/IRremote.o
  .text.ir_decodeSony
-                0x0000166e      0x15a IRlib/IRremote.o
+                0x00001814      0x15a IRlib/IRremote.o
  .text.ir_decodeSanyo
-                0x000017c8      0x174 IRlib/IRremote.o
+                0x0000196e      0x174 IRlib/IRremote.o
  .text.ir_decodeMitsubishi
-                0x0000193c      0x13c IRlib/IRremote.o
+                0x00001ae2      0x13c IRlib/IRremote.o
  .text.ir_decodeRC6
-                0x00001a78      0x1fe IRlib/IRremote.o
+                0x00001c1e      0x1fe IRlib/IRremote.o
  .text.ir_decodePanasonic
-                0x00001c76      0x1b6 IRlib/IRremote.o
+                0x00001e1c      0x1b6 IRlib/IRremote.o
  .text.ir_decodeJVC
-                0x00001e2c      0x1c4 IRlib/IRremote.o
+                0x00001fd2      0x1c4 IRlib/IRremote.o
  .text.ir_sendNEC
-                0x00001ff0       0x8e IRlib/IRremote.o
-                0x00001ff0                ir_sendNEC
+                0x00002196       0x8e IRlib/IRremote.o
+                0x00002196                ir_sendNEC
  .text.ir_sendSony
-                0x0000207e       0x96 IRlib/IRremote.o
-                0x0000207e                ir_sendSony
+                0x00002224       0x96 IRlib/IRremote.o
+                0x00002224                ir_sendSony
  .text.ir_sendRC5
-                0x00002114       0xa6 IRlib/IRremote.o
-                0x00002114                ir_sendRC5
+                0x000022ba       0xa6 IRlib/IRremote.o
+                0x000022ba                ir_sendRC5
  .text.ir_enableIRIn
-                0x000021ba       0x26 IRlib/IRremote.o
-                0x000021ba                ir_enableIRIn
+                0x00002360       0x26 IRlib/IRremote.o
+                0x00002360                ir_enableIRIn
  .text.ir_interruptService
-                0x000021e0      0x150 IRlib/IRremote.o
-                0x000021e0                ir_interruptService
+                0x00002386      0x150 IRlib/IRremote.o
+                0x00002386                ir_interruptService
  .text.ir_resume
-                0x00002330       0x10 IRlib/IRremote.o
-                0x00002330                ir_resume
+                0x000024d6       0x10 IRlib/IRremote.o
+                0x000024d6                ir_resume
  .text.ir_decode
-                0x00002340       0xf6 IRlib/IRremote.o
-                0x00002340                ir_decode
+                0x000024e6       0xf6 IRlib/IRremote.o
+                0x000024e6                ir_decode
  .text.lcd_read
-                0x00002436       0xb6 lcdpcf8574/lcdpcf8574.o
+                0x000025dc       0xb6 lcdpcf8574/lcdpcf8574.o
  .text.lcd_waitbusy
-                0x000024ec       0x16 lcdpcf8574/lcdpcf8574.o
+                0x00002692       0x16 lcdpcf8574/lcdpcf8574.o
  .text.toggle_e
-                0x00002502       0x10 lcdpcf8574/lcdpcf8574.o
+                0x000026a8       0x10 lcdpcf8574/lcdpcf8574.o
  .text.lcd_write
-                0x00002512      0x138 lcdpcf8574/lcdpcf8574.o
+                0x000026b8      0x138 lcdpcf8574/lcdpcf8574.o
  .text.lcd_command
-                0x0000264a       0x10 lcdpcf8574/lcdpcf8574.o
-                0x0000264a                lcd_command
+                0x000027f0       0x10 lcdpcf8574/lcdpcf8574.o
+                0x000027f0                lcd_command
  .text.lcd_gotoxy
-                0x0000265a       0x10 lcdpcf8574/lcdpcf8574.o
-                0x0000265a                lcd_gotoxy
+                0x00002800       0x10 lcdpcf8574/lcdpcf8574.o
+                0x00002800                lcd_gotoxy
  .text.lcd_clrscr
-                0x0000266a        0x6 lcdpcf8574/lcdpcf8574.o
-                0x0000266a                lcd_clrscr
- .text.lcd_led  0x00002670       0x24 lcdpcf8574/lcdpcf8574.o
-                0x00002670                lcd_led
+                0x00002810        0x6 lcdpcf8574/lcdpcf8574.o
+                0x00002810                lcd_clrscr
+ .text.lcd_led  0x00002816       0x24 lcdpcf8574/lcdpcf8574.o
+                0x00002816                lcd_led
  .text.lcd_home
-                0x00002694        0x6 lcdpcf8574/lcdpcf8574.o
-                0x00002694                lcd_home
+                0x0000283a        0x6 lcdpcf8574/lcdpcf8574.o
+                0x0000283a                lcd_home
  .text.lcd_putc
-                0x0000269a       0x24 lcdpcf8574/lcdpcf8574.o
-                0x0000269a                lcd_putc
+                0x00002840       0x24 lcdpcf8574/lcdpcf8574.o
+                0x00002840                lcd_putc
  .text.lcd_puts
-                0x000026be       0x1c lcdpcf8574/lcdpcf8574.o
-                0x000026be                lcd_puts
+                0x00002864       0x1c lcdpcf8574/lcdpcf8574.o
+                0x00002864                lcd_puts
  .text.lcd_init
-                0x000026da       0x8a lcdpcf8574/lcdpcf8574.o
-                0x000026da                lcd_init
- .text.main     0x00002764       0x6e main.o
-                0x00002764                main
+                0x00002880       0x8a lcdpcf8574/lcdpcf8574.o
+                0x00002880                lcd_init
+ .text.main     0x0000290a       0x6e main.o
+                0x0000290a                main
  .text.__vector_14
-                0x000027d2       0x46 main.o
-                0x000027d2                __vector_14
+                0x00002978       0x46 main.o
+                0x00002978                __vector_14
  .text.__vector_7
-                0x00002818       0x46 main.o
-                0x00002818                __vector_7
+                0x000029be       0x46 main.o
+                0x000029be                __vector_7
  .text.pcf8574_init
-                0x0000285e       0x22 pcf8574/pcf8574.o
-                0x0000285e                pcf8574_init
+                0x00002a04       0x22 pcf8574/pcf8574.o
+                0x00002a04                pcf8574_init
  .text.pcf8574_setoutput
-                0x00002880       0x2e pcf8574/pcf8574.o
-                0x00002880                pcf8574_setoutput
+                0x00002a26       0x2e pcf8574/pcf8574.o
+                0x00002a26                pcf8574_setoutput
  .text.pcf8574_setoutputpin
-                0x000028ae       0x6a pcf8574/pcf8574.o
-                0x000028ae                pcf8574_setoutputpin
+                0x00002a54       0x6a pcf8574/pcf8574.o
+                0x00002a54                pcf8574_setoutputpin
  .text.pcf8574_setoutputpinhigh
-                0x00002918        0x6 pcf8574/pcf8574.o
-                0x00002918                pcf8574_setoutputpinhigh
+                0x00002abe        0x6 pcf8574/pcf8574.o
+                0x00002abe                pcf8574_setoutputpinhigh
  .text.pcf8574_setoutputpinlow
-                0x0000291e        0x6 pcf8574/pcf8574.o
-                0x0000291e                pcf8574_setoutputpinlow
+                0x00002ac4        0x6 pcf8574/pcf8574.o
+                0x00002ac4                pcf8574_setoutputpinlow
  .text.pcf8574_getinput
-                0x00002924       0x2a pcf8574/pcf8574.o
-                0x00002924                pcf8574_getinput
+                0x00002aca       0x2a pcf8574/pcf8574.o
+                0x00002aca                pcf8574_getinput
  .text.pcf8574_getinputpin
-                0x0000294e       0x30 pcf8574/pcf8574.o
-                0x0000294e                pcf8574_getinputpin
+                0x00002af4       0x30 pcf8574/pcf8574.o
+                0x00002af4                pcf8574_getinputpin
  .text.initSysTick
-                0x0000297e       0x18 systick.o
-                0x0000297e                initSysTick
+                0x00002b24       0x18 systick.o
+                0x00002b24                initSysTick
  .text.incSysTick
-                0x00002996       0x14 systick.o
-                0x00002996                incSysTick
+                0x00002b3c       0x14 systick.o
+                0x00002b3c                incSysTick
  .text.marqueTime16
-                0x000029aa       0x10 systick.o
-                0x000029aa                marqueTime16
+                0x00002b50       0x10 systick.o
+                0x00002b50                marqueTime16
  .text.elapsedTime16
-                0x000029ba       0x34 systick.o
-                0x000029ba                elapsedTime16
+                0x00002b60       0x34 systick.o
+                0x00002b60                elapsedTime16
  .text.avr-libc.fplib
-                0x000029ee        0xa c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(addsf3.o)
-                0x000029ee                __subsf3
-                0x000029f0                __addsf3
+                0x00002b94        0xa c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(addsf3.o)
+                0x00002b94                __subsf3
+                0x00002b96                __addsf3
  .text.avr-libc.fplib
-                0x000029f8       0xc0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(addsf3x.o)
-                0x00002a12                __addsf3x
+                0x00002b9e       0xc0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(addsf3x.o)
+                0x00002bb8                __addsf3x
  .text.avr-libc.fplib
-                0x00002ab8        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(cmpsf2.o)
-                0x00002ab8                __nesf2
-                0x00002ab8                __eqsf2
-                0x00002ab8                __cmpsf2
-                0x00002ab8                __ltsf2
-                0x00002ab8                __lesf2
+                0x00002c5e        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(cmpsf2.o)
+                0x00002c5e                __nesf2
+                0x00002c5e                __eqsf2
+                0x00002c5e                __cmpsf2
+                0x00002c5e                __ltsf2
+                0x00002c5e                __lesf2
  .text.avr-libc.fplib
-                0x00002ac0        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(divsf3.o)
-                0x00002ac0                __divsf3
+                0x00002c66        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(divsf3.o)
+                0x00002c66                __divsf3
  .text.avr-libc.fplib
-                0x00002ac4       0xcc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(divsf3x.o)
-                0x00002ada                __divsf3x
-                0x00002ade                __divsf3_pse
+                0x00002c6a       0xcc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(divsf3x.o)
+                0x00002c80                __divsf3x
+                0x00002c84                __divsf3_pse
  .text.avr-libc.fplib
-                0x00002b90        0xa c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fixsfsi.o)
-                0x00002b90                __fixsfsi
+                0x00002d36        0xa c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fixsfsi.o)
+                0x00002d36                __fixsfsi
  .text.avr-libc.fplib
-                0x00002b9a       0x58 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fixunssfsi.o)
-                0x00002b9a                __fixunssfsi
+                0x00002d40       0x58 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fixunssfsi.o)
+                0x00002d40                __fixunssfsi
  .text.avr-libc.fplib
-                0x00002bf2       0x7a c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(floatsisf.o)
-                0x00002bf2                __floatunsisf
-                0x00002bf6                __floatsisf
+                0x00002d98       0x7a c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(floatsisf.o)
+                0x00002d98                __floatunsisf
+                0x00002d9c                __floatsisf
  .text.avr-libc.fplib
-                0x00002c6c       0x48 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_cmp.o)
-                0x00002c6c                __fp_cmp
+                0x00002e12       0x48 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_cmp.o)
+                0x00002e12                __fp_cmp
  .text.avr-libc.fplib
-                0x00002cb4        0xc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_inf.o)
-                0x00002cb4                __fp_inf
+                0x00002e5a        0xc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_inf.o)
+                0x00002e5a                __fp_inf
  .text.avr-libc.fplib
-                0x00002cc0        0x6 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_nan.o)
-                0x00002cc0                __fp_nan
+                0x00002e66        0x6 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_nan.o)
+                0x00002e66                __fp_nan
  .text.avr-libc.fplib
-                0x00002cc6        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_pscA.o)
-                0x00002cc6                __fp_pscA
+                0x00002e6c        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_pscA.o)
+                0x00002e6c                __fp_pscA
  .text.avr-libc.fplib
-                0x00002cd4        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_pscB.o)
-                0x00002cd4                __fp_pscB
+                0x00002e7a        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_pscB.o)
+                0x00002e7a                __fp_pscB
  .text.avr-libc.fplib
-                0x00002ce2       0x22 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_round.o)
-                0x00002ce2                __fp_round
+                0x00002e88       0x22 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_round.o)
+                0x00002e88                __fp_round
  .text.avr-libc.fplib
-                0x00002d04       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_split3.o)
-                0x00002d04                __fp_split3
-                0x00002d14                __fp_splitA
+                0x00002eaa       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_split3.o)
+                0x00002eaa                __fp_split3
+                0x00002eba                __fp_splitA
  .text.avr-libc.fplib
-                0x00002d48        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_zero.o)
-                0x00002d48                __fp_zero
-                0x00002d4a                __fp_szero
+                0x00002eee        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_zero.o)
+                0x00002eee                __fp_zero
+                0x00002ef0                __fp_szero
  .text.avr-libc.fplib
-                0x00002d56        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(mulsf3.o)
-                0x00002d56                __mulsf3
+                0x00002efc        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(mulsf3.o)
+                0x00002efc                __mulsf3
  .text.avr-libc.fplib
-                0x00002d5a       0xc2 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(mulsf3x.o)
-                0x00002d6e                __mulsf3x
-                0x00002d72                __mulsf3_pse
+                0x00002f00       0xc2 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(mulsf3x.o)
+                0x00002f14                __mulsf3x
+                0x00002f18                __mulsf3_pse
  .text.libgcc.mul
-                0x00002e1c       0x1e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_mulsi3.o)
-                0x00002e1c                __mulsi3
- .text.libgcc   0x00002e3a        0xc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_tablejump2.o)
-                0x00002e3a                __tablejump2__
+                0x00002fc2       0x1e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_mulsi3.o)
+                0x00002fc2                __mulsi3
+ .text.libgcc   0x00002fe0        0xc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_tablejump2.o)
+                0x00002fe0                __tablejump2__
  .text.libgcc.mul
-                0x00002e46       0x14 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_muluhisi3.o)
-                0x00002e46                __muluhisi3
+                0x00002fec       0x14 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_muluhisi3.o)
+                0x00002fec                __muluhisi3
  .text.libgcc.mul
-                0x00002e5a       0x1e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_umulhisi3.o)
-                0x00002e5a                __umulhisi3
+                0x00003000       0x1e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_umulhisi3.o)
+                0x00003000                __umulhisi3
  .text.avr-libc
-                0x00002e78       0x3e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(sprintf.o)
-                0x00002e78                sprintf
+                0x0000301e       0x3e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(sprintf.o)
+                0x0000301e                sprintf
  .text.avr-libc
-                0x00002eb6      0x3a4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(vfprintf_std.o)
-                0x00002eb6                vfprintf
+                0x0000305c      0x3a4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(vfprintf_std.o)
+                0x0000305c                vfprintf
  .text.avr-libc
-                0x0000325a       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strnlen_P.o)
-                0x0000325a                strnlen_P
+                0x00003400       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strnlen_P.o)
+                0x00003400                strnlen_P
  .text.avr-libc
-                0x00003270       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strnlen.o)
-                0x00003270                strnlen
+                0x00003416       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strnlen.o)
+                0x00003416                strnlen
  .text.avr-libc
-                0x00003286       0x78 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(fputc.o)
-                0x00003286                fputc
+                0x0000342c       0x78 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(fputc.o)
+                0x0000342c                fputc
  .text.avr-libc
-                0x000032fe       0xbc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(ultoa_invert.o)
-                0x000032fe                __ultoa_invert
+                0x000034a4       0xbc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(ultoa_invert.o)
+                0x000034a4                __ultoa_invert
  .text.avr-libc
-                0x000033ba       0x10 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.150/gcc/dev/atmega328p/avr5\libatmega328p.a(eerd_byte.o)
-                0x000033ba                eeprom_read_byte
+                0x00003560       0x10 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.150/gcc/dev/atmega328p/avr5\libatmega328p.a(eerd_byte.o)
+                0x00003560                eeprom_read_byte
  .text.avr-libc
-                0x000033ca       0x24 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.150/gcc/dev/atmega328p/avr5\libatmega328p.a(eeupd_byte.o)
-                0x000033ca                eeprom_update_byte
-                0x000033cc                eeprom_update_r18
+                0x00003570       0x24 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.150/gcc/dev/atmega328p/avr5\libatmega328p.a(eeupd_byte.o)
+                0x00003570                eeprom_update_byte
+                0x00003572                eeprom_update_r18
  .text.libgcc.prologue
-                0x000033ee       0x38 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_prologue.o)
-                0x000033ee                __prologue_saves__
+                0x00003594       0x38 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_prologue.o)
+                0x00003594                __prologue_saves__
  .text.libgcc.prologue
-                0x00003426       0x36 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_epilogue.o)
-                0x00003426                __epilogue_restores__
-                0x0000345c                . = ALIGN (0x2)
+                0x000035cc       0x36 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_epilogue.o)
+                0x000035cc                __epilogue_restores__
+                0x00003602                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x0000345c        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
-                0x0000345c                _exit
-                0x0000345c                exit
+ .fini9         0x00003602        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+                0x00003602                _exit
+                0x00003602                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -937,11 +940,11 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x0000345c        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+ .fini0         0x00003602        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x00003460                _etext = .
+                0x00003606                _etext = .
 
-.data           0x00800100       0xae load address 0x00003460
+.data           0x00800100       0xc8 load address 0x00003606
                 0x00800100                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
@@ -956,64 +959,64 @@ END GROUP
  .rodata.str1.1
                 0x0080011a       0x1e playMenu.o
  .rodata.str1.1
-                0x00800138       0x11 savedMenu.o
+                0x00800138       0x11 SavedMenu.o
  .rodata.str1.1
                 0x00800149       0x1e spyRecMenu.o
  .rodata.str1.1
-                0x00800167       0x46 screen.o
+                0x00800167       0x60 screen.o
  *(.gnu.linkonce.r*)
-                0x008001ae                . = ALIGN (0x2)
- *fill*         0x008001ad        0x1 
-                0x008001ae                _edata = .
-                0x008001ae                PROVIDE (__data_end, .)
+                0x008001c8                . = ALIGN (0x2)
+ *fill*         0x008001c7        0x1 
+                0x008001c8                _edata = .
+                0x008001c8                PROVIDE (__data_end, .)
 
-.bss            0x008001ae      0x115
-                0x008001ae                PROVIDE (__bss_start, .)
+.bss            0x008001c8      0x115
+                0x008001c8                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
  .bss.PrevKeyCode.1772
-                0x008001ae        0x1 keyboard.o
+                0x008001c8        0x1 keyboard.o
  .bss.ReleasedKeyCode
-                0x008001af        0x1 keyboard.o
-                0x008001af                ReleasedKeyCode
+                0x008001c9        0x1 keyboard.o
+                0x008001c9                ReleasedKeyCode
  .bss.PressedKeyCode
-                0x008001b0        0x1 keyboard.o
-                0x008001b0                PressedKeyCode
+                0x008001ca        0x1 keyboard.o
+                0x008001ca                PressedKeyCode
  .bss.index.2414
-                0x008001b1        0x1 mainMenu.o
+                0x008001cb        0x1 mainMenu.o
  .bss.ref1.2414
-                0x008001b2        0x2 savedMenu.o
- .bss.ref1.2419
-                0x008001b4        0x2 spyRecMenu.o
- .bss.dec_results_save.2418
-                0x008001b6        0xe spyRecMenu.o
- .bss.resume.2420
-                0x008001c4        0x1 spyRecMenu.o
- .bss.Refresh   0x008001c5        0x1 screen.o
-                0x008001c5                Refresh
+                0x008001cc        0x2 SavedMenu.o
+ .bss.ref1.2421
+                0x008001ce        0x2 spyRecMenu.o
+ .bss.dec_results_save.2420
+                0x008001d0        0xe spyRecMenu.o
+ .bss.resume.2422
+                0x008001de        0x1 spyRecMenu.o
+ .bss.Refresh   0x008001df        0x1 screen.o
+                0x008001df                Refresh
  .bss.ScreenBuf
-                0x008001c6       0x22 screen.o
-                0x008001c6                ScreenBuf
- .bss.dataport  0x008001e8        0x1 lcdpcf8574/lcdpcf8574.o
-                0x008001e8                dataport
- .bss.SysTick   0x008001e9        0x2 systick.o
-                0x008001e9                SysTick
+                0x008001e0       0x22 screen.o
+                0x008001e0                ScreenBuf
+ .bss.dataport  0x00800202        0x1 lcdpcf8574/lcdpcf8574.o
+                0x00800202                dataport
+ .bss.SysTick   0x00800203        0x2 systick.o
+                0x00800203                SysTick
  *(COMMON)
- COMMON         0x008001eb        0x2 screen.o
-                0x008001eb                updatePtr
- COMMON         0x008001ed       0xce IRlib/IRremote.o
-                0x008001ed                irparams
- COMMON         0x008002bb        0x8 lcdpcf8574/lcdpcf8574.o
-                0x008002bb                pcf8574_pinstatus
-                0x008002c3                PROVIDE (__bss_end, .)
-                0x00003460                __data_load_start = LOADADDR (.data)
-                0x0000350e                __data_load_end = (__data_load_start + SIZEOF (.data))
+ COMMON         0x00800205        0x2 screen.o
+                0x00800205                updatePtr
+ COMMON         0x00800207       0xce IRlib/IRremote.o
+                0x00800207                irparams
+ COMMON         0x008002d5        0x8 lcdpcf8574/lcdpcf8574.o
+                0x008002d5                pcf8574_pinstatus
+                0x008002dd                PROVIDE (__bss_end, .)
+                0x00003606                __data_load_start = LOADADDR (.data)
+                0x000036ce                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x008002c3        0x0
+.noinit         0x008002dd        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
  *(.noinit*)
                 [!provide]                PROVIDE (__noinit_end, .)
-                0x008002c3                _end = .
+                0x008002dd                _end = .
                 [!provide]                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
@@ -1060,7 +1063,7 @@ END GROUP
  .comment       0x00000030       0x31 keyboard.o
  .comment       0x00000030       0x31 mainMenu.o
  .comment       0x00000030       0x31 playMenu.o
- .comment       0x00000030       0x31 savedMenu.o
+ .comment       0x00000030       0x31 SavedMenu.o
  .comment       0x00000030       0x31 spyRecMenu.o
  .comment       0x00000030       0x31 screen.o
  .comment       0x00000030       0x31 i2chw/twimaster.o
@@ -1094,7 +1097,7 @@ END GROUP
 .debug_sfnames
  *(.debug_sfnames)
 
-.debug_aranges  0x00000000      0x470
+.debug_aranges  0x00000000      0x478
  *(.debug_aranges)
  .debug_aranges
                 0x00000000       0x28 eeprom.o
@@ -1105,148 +1108,148 @@ END GROUP
  .debug_aranges
                 0x00000090       0x28 playMenu.o
  .debug_aranges
-                0x000000b8       0x20 savedMenu.o
+                0x000000b8       0x20 SavedMenu.o
  .debug_aranges
-                0x000000d8       0x28 spyRecMenu.o
+                0x000000d8       0x30 spyRecMenu.o
  .debug_aranges
-                0x00000100       0x30 screen.o
+                0x00000108       0x30 screen.o
  .debug_aranges
-                0x00000130       0x58 i2chw/twimaster.o
+                0x00000138       0x58 i2chw/twimaster.o
  .debug_aranges
-                0x00000188      0x138 IRlib/IRremote.o
+                0x00000190      0x138 IRlib/IRremote.o
  .debug_aranges
-                0x000002c0       0xa0 lcdpcf8574/lcdpcf8574.o
+                0x000002c8       0xa0 lcdpcf8574/lcdpcf8574.o
  .debug_aranges
-                0x00000360       0x30 main.o
+                0x00000368       0x30 main.o
  .debug_aranges
-                0x00000390       0x68 pcf8574/pcf8574.o
+                0x00000398       0x68 pcf8574/pcf8574.o
  .debug_aranges
-                0x000003f8       0x38 systick.o
+                0x00000400       0x38 systick.o
  .debug_aranges
-                0x00000430       0x20 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.150/gcc/dev/atmega328p/avr5\libatmega328p.a(eerd_byte.o)
+                0x00000438       0x20 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.150/gcc/dev/atmega328p/avr5\libatmega328p.a(eerd_byte.o)
  .debug_aranges
-                0x00000450       0x20 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.150/gcc/dev/atmega328p/avr5\libatmega328p.a(eeupd_byte.o)
+                0x00000458       0x20 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.150/gcc/dev/atmega328p/avr5\libatmega328p.a(eeupd_byte.o)
 
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x4833
+.debug_info     0x00000000     0x48f4
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x5f4 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.150/gcc/dev/atmega328p/avr5/crtatmega328p.o
- .debug_info    0x000005f4      0x363 eeprom.o
- .debug_info    0x00000957      0x17e keyboard.o
- .debug_info    0x00000ad5      0x16b mainMenu.o
- .debug_info    0x00000c40      0x36a playMenu.o
- .debug_info    0x00000faa      0x151 savedMenu.o
- .debug_info    0x000010fb      0x430 spyRecMenu.o
- .debug_info    0x0000152b      0x2aa screen.o
- .debug_info    0x000017d5      0x1bd i2chw/twimaster.o
- .debug_info    0x00001992     0x1b7d IRlib/IRremote.o
- .debug_info    0x0000350f      0x92c lcdpcf8574/lcdpcf8574.o
- .debug_info    0x00003e3b      0x22e main.o
- .debug_info    0x00004069      0x557 pcf8574/pcf8574.o
- .debug_info    0x000045c0      0x11a systick.o
- .debug_info    0x000046da       0xac C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.150/gcc/dev/atmega328p/avr5\libatmega328p.a(eerd_byte.o)
- .debug_info    0x00004786       0xad C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.150/gcc/dev/atmega328p/avr5\libatmega328p.a(eeupd_byte.o)
+ .debug_info    0x000005f4      0x3bd eeprom.o
+ .debug_info    0x000009b1      0x17e keyboard.o
+ .debug_info    0x00000b2f      0x16b mainMenu.o
+ .debug_info    0x00000c9a      0x37a playMenu.o
+ .debug_info    0x00001014      0x151 SavedMenu.o
+ .debug_info    0x00001165      0x47c spyRecMenu.o
+ .debug_info    0x000015e1      0x2b5 screen.o
+ .debug_info    0x00001896      0x1bd i2chw/twimaster.o
+ .debug_info    0x00001a53     0x1b7d IRlib/IRremote.o
+ .debug_info    0x000035d0      0x92c lcdpcf8574/lcdpcf8574.o
+ .debug_info    0x00003efc      0x22e main.o
+ .debug_info    0x0000412a      0x557 pcf8574/pcf8574.o
+ .debug_info    0x00004681      0x11a systick.o
+ .debug_info    0x0000479b       0xac C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.150/gcc/dev/atmega328p/avr5\libatmega328p.a(eerd_byte.o)
+ .debug_info    0x00004847       0xad C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.150/gcc/dev/atmega328p/avr5\libatmega328p.a(eeupd_byte.o)
 
-.debug_abbrev   0x00000000     0x15e1
+.debug_abbrev   0x00000000     0x160a
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x5a2 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.150/gcc/dev/atmega328p/avr5/crtatmega328p.o
  .debug_abbrev  0x000005a2       0xde eeprom.o
  .debug_abbrev  0x00000680       0xb9 keyboard.o
  .debug_abbrev  0x00000739       0xbc mainMenu.o
  .debug_abbrev  0x000007f5      0x12f playMenu.o
- .debug_abbrev  0x00000924       0xc9 savedMenu.o
- .debug_abbrev  0x000009ed      0x11e spyRecMenu.o
- .debug_abbrev  0x00000b0b      0x15a screen.o
- .debug_abbrev  0x00000c65       0xe5 i2chw/twimaster.o
- .debug_abbrev  0x00000d4a      0x28d IRlib/IRremote.o
- .debug_abbrev  0x00000fd7      0x296 lcdpcf8574/lcdpcf8574.o
- .debug_abbrev  0x0000126d       0xd8 main.o
- .debug_abbrev  0x00001345      0x1b0 pcf8574/pcf8574.o
- .debug_abbrev  0x000014f5       0xc4 systick.o
- .debug_abbrev  0x000015b9       0x14 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.150/gcc/dev/atmega328p/avr5\libatmega328p.a(eerd_byte.o)
- .debug_abbrev  0x000015cd       0x14 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.150/gcc/dev/atmega328p/avr5\libatmega328p.a(eeupd_byte.o)
+ .debug_abbrev  0x00000924       0xc9 SavedMenu.o
+ .debug_abbrev  0x000009ed      0x147 spyRecMenu.o
+ .debug_abbrev  0x00000b34      0x15a screen.o
+ .debug_abbrev  0x00000c8e       0xe5 i2chw/twimaster.o
+ .debug_abbrev  0x00000d73      0x28d IRlib/IRremote.o
+ .debug_abbrev  0x00001000      0x296 lcdpcf8574/lcdpcf8574.o
+ .debug_abbrev  0x00001296       0xd8 main.o
+ .debug_abbrev  0x0000136e      0x1b0 pcf8574/pcf8574.o
+ .debug_abbrev  0x0000151e       0xc4 systick.o
+ .debug_abbrev  0x000015e2       0x14 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.150/gcc/dev/atmega328p/avr5\libatmega328p.a(eerd_byte.o)
+ .debug_abbrev  0x000015f6       0x14 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.150/gcc/dev/atmega328p/avr5\libatmega328p.a(eeupd_byte.o)
 
-.debug_line     0x00000000     0x2ee0
+.debug_line     0x00000000     0x2f57
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x133 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.150/gcc/dev/atmega328p/avr5/crtatmega328p.o
- .debug_line    0x00000133      0x21a eeprom.o
- .debug_line    0x0000034d      0x1a0 keyboard.o
- .debug_line    0x000004ed      0x14a mainMenu.o
- .debug_line    0x00000637      0x21a playMenu.o
- .debug_line    0x00000851       0xea savedMenu.o
- .debug_line    0x0000093b      0x27c spyRecMenu.o
- .debug_line    0x00000bb7      0x1f6 screen.o
- .debug_line    0x00000dad      0x288 i2chw/twimaster.o
- .debug_line    0x00001035     0x1114 IRlib/IRremote.o
- .debug_line    0x00002149      0x5eb lcdpcf8574/lcdpcf8574.o
- .debug_line    0x00002734      0x196 main.o
- .debug_line    0x000028ca      0x3dc pcf8574/pcf8574.o
- .debug_line    0x00002ca6      0x10a systick.o
- .debug_line    0x00002db0       0x7a C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.150/gcc/dev/atmega328p/avr5\libatmega328p.a(eerd_byte.o)
- .debug_line    0x00002e2a       0xb6 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.150/gcc/dev/atmega328p/avr5\libatmega328p.a(eeupd_byte.o)
+ .debug_line    0x00000133      0x24a eeprom.o
+ .debug_line    0x0000037d      0x1a0 keyboard.o
+ .debug_line    0x0000051d      0x14a mainMenu.o
+ .debug_line    0x00000667      0x21a playMenu.o
+ .debug_line    0x00000881       0xea SavedMenu.o
+ .debug_line    0x0000096b      0x2a5 spyRecMenu.o
+ .debug_line    0x00000c10      0x214 screen.o
+ .debug_line    0x00000e24      0x288 i2chw/twimaster.o
+ .debug_line    0x000010ac     0x1114 IRlib/IRremote.o
+ .debug_line    0x000021c0      0x5eb lcdpcf8574/lcdpcf8574.o
+ .debug_line    0x000027ab      0x196 main.o
+ .debug_line    0x00002941      0x3dc pcf8574/pcf8574.o
+ .debug_line    0x00002d1d      0x10a systick.o
+ .debug_line    0x00002e27       0x7a C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.150/gcc/dev/atmega328p/avr5\libatmega328p.a(eerd_byte.o)
+ .debug_line    0x00002ea1       0xb6 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.150/gcc/dev/atmega328p/avr5\libatmega328p.a(eeupd_byte.o)
 
-.debug_frame    0x00000000      0xe2c
+.debug_frame    0x00000000      0xe78
  *(.debug_frame)
  .debug_frame   0x00000000       0x94 eeprom.o
  .debug_frame   0x00000094       0x7c keyboard.o
  .debug_frame   0x00000110       0x30 mainMenu.o
  .debug_frame   0x00000140       0x50 playMenu.o
- .debug_frame   0x00000190       0x24 savedMenu.o
- .debug_frame   0x000001b4       0x44 spyRecMenu.o
- .debug_frame   0x000001f8      0x12c screen.o
- .debug_frame   0x00000324       0x94 i2chw/twimaster.o
- .debug_frame   0x000003b8      0x6d0 IRlib/IRremote.o
- .debug_frame   0x00000a88      0x18c lcdpcf8574/lcdpcf8574.o
- .debug_frame   0x00000c14       0xe4 main.o
- .debug_frame   0x00000cf8       0xe0 pcf8574/pcf8574.o
- .debug_frame   0x00000dd8       0x54 systick.o
+ .debug_frame   0x00000190       0x24 SavedMenu.o
+ .debug_frame   0x000001b4       0x54 spyRecMenu.o
+ .debug_frame   0x00000208      0x168 screen.o
+ .debug_frame   0x00000370       0x94 i2chw/twimaster.o
+ .debug_frame   0x00000404      0x6d0 IRlib/IRremote.o
+ .debug_frame   0x00000ad4      0x18c lcdpcf8574/lcdpcf8574.o
+ .debug_frame   0x00000c60       0xe4 main.o
+ .debug_frame   0x00000d44       0xe0 pcf8574/pcf8574.o
+ .debug_frame   0x00000e24       0x54 systick.o
 
-.debug_str      0x00000000      0xc2f
+.debug_str      0x00000000      0xc54
  *(.debug_str)
  .debug_str     0x00000000      0x208 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.150/gcc/dev/atmega328p/avr5/crtatmega328p.o
- .debug_str     0x00000208      0x1ec eeprom.o
-                                0x22d (size before relaxing)
- .debug_str     0x000003f4       0xb8 keyboard.o
+ .debug_str     0x00000208      0x1fb eeprom.o
+                                0x23c (size before relaxing)
+ .debug_str     0x00000403       0xb8 keyboard.o
                                 0x221 (size before relaxing)
- .debug_str     0x000004ac       0x7c mainMenu.o
+ .debug_str     0x000004bb       0x7c mainMenu.o
                                 0x1f9 (size before relaxing)
- .debug_str     0x00000528       0x60 playMenu.o
+ .debug_str     0x00000537       0x60 playMenu.o
                                 0x269 (size before relaxing)
- .debug_str     0x00000588       0x3d savedMenu.o
+ .debug_str     0x00000597       0x3d SavedMenu.o
                                 0x1e7 (size before relaxing)
- .debug_str     0x000005c5       0x5e spyRecMenu.o
-                                0x2a8 (size before relaxing)
- .debug_str     0x00000623       0x5c screen.o
-                                0x27f (size before relaxing)
- .debug_str     0x0000067f       0x75 i2chw/twimaster.o
+ .debug_str     0x000005d4       0x6c spyRecMenu.o
+                                0x2b6 (size before relaxing)
+ .debug_str     0x00000640       0x5c screen.o
+                                0x288 (size before relaxing)
+ .debug_str     0x0000069c       0x7d i2chw/twimaster.o
                                 0x1eb (size before relaxing)
- .debug_str     0x000006f4      0x26a IRlib/IRremote.o
+ .debug_str     0x00000719      0x26a IRlib/IRremote.o
                                 0x48a (size before relaxing)
- .debug_str     0x0000095e      0x19c lcdpcf8574/lcdpcf8574.o
+ .debug_str     0x00000983      0x19c lcdpcf8574/lcdpcf8574.o
                                 0x349 (size before relaxing)
- .debug_str     0x00000afa       0x4b main.o
+ .debug_str     0x00000b1f       0x4b main.o
                                 0x23b (size before relaxing)
- .debug_str     0x00000b45       0xdb pcf8574/pcf8574.o
+ .debug_str     0x00000b6a       0xdb pcf8574/pcf8574.o
                                 0x30a (size before relaxing)
- .debug_str     0x00000c20        0xf systick.o
+ .debug_str     0x00000c45        0xf systick.o
                                 0x1bb (size before relaxing)
 
-.debug_loc      0x00000000     0x3f26
+.debug_loc      0x00000000     0x4065
  *(.debug_loc)
- .debug_loc     0x00000000      0x229 eeprom.o
- .debug_loc     0x00000229       0x7d keyboard.o
- .debug_loc     0x000002a6       0x2f mainMenu.o
- .debug_loc     0x000002d5       0xe3 playMenu.o
- .debug_loc     0x000003b8       0x85 spyRecMenu.o
- .debug_loc     0x0000043d      0x490 screen.o
- .debug_loc     0x000008cd      0x11a i2chw/twimaster.o
- .debug_loc     0x000009e7     0x252a IRlib/IRremote.o
- .debug_loc     0x00002f11      0x708 lcdpcf8574/lcdpcf8574.o
- .debug_loc     0x00003619      0x1de main.o
- .debug_loc     0x000037f7      0x707 pcf8574/pcf8574.o
- .debug_loc     0x00003efe       0x28 systick.o
+ .debug_loc     0x00000000      0x23c eeprom.o
+ .debug_loc     0x0000023c       0x7d keyboard.o
+ .debug_loc     0x000002b9       0x2f mainMenu.o
+ .debug_loc     0x000002e8       0xe3 playMenu.o
+ .debug_loc     0x000003cb       0xad spyRecMenu.o
+ .debug_loc     0x00000478      0x594 screen.o
+ .debug_loc     0x00000a0c      0x11a i2chw/twimaster.o
+ .debug_loc     0x00000b26     0x252a IRlib/IRremote.o
+ .debug_loc     0x00003050      0x708 lcdpcf8574/lcdpcf8574.o
+ .debug_loc     0x00003758      0x1de main.o
+ .debug_loc     0x00003936      0x707 pcf8574/pcf8574.o
+ .debug_loc     0x0000403d       0x28 systick.o
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -1266,21 +1269,21 @@ END GROUP
 .debug_pubtypes
  *(.debug_pubtypes)
 
-.debug_ranges   0x00000000      0x390
+.debug_ranges   0x00000000      0x398
  *(.debug_ranges)
  .debug_ranges  0x00000000       0x18 eeprom.o
  .debug_ranges  0x00000018       0x38 keyboard.o
  .debug_ranges  0x00000050       0x10 mainMenu.o
  .debug_ranges  0x00000060       0x18 playMenu.o
- .debug_ranges  0x00000078       0x10 savedMenu.o
- .debug_ranges  0x00000088       0x18 spyRecMenu.o
- .debug_ranges  0x000000a0       0x20 screen.o
- .debug_ranges  0x000000c0       0x48 i2chw/twimaster.o
- .debug_ranges  0x00000108      0x158 IRlib/IRremote.o
- .debug_ranges  0x00000260       0x90 lcdpcf8574/lcdpcf8574.o
- .debug_ranges  0x000002f0       0x20 main.o
- .debug_ranges  0x00000310       0x58 pcf8574/pcf8574.o
- .debug_ranges  0x00000368       0x28 systick.o
+ .debug_ranges  0x00000078       0x10 SavedMenu.o
+ .debug_ranges  0x00000088       0x20 spyRecMenu.o
+ .debug_ranges  0x000000a8       0x20 screen.o
+ .debug_ranges  0x000000c8       0x48 i2chw/twimaster.o
+ .debug_ranges  0x00000110      0x158 IRlib/IRremote.o
+ .debug_ranges  0x00000268       0x90 lcdpcf8574/lcdpcf8574.o
+ .debug_ranges  0x000002f8       0x20 main.o
+ .debug_ranges  0x00000318       0x58 pcf8574/pcf8574.o
+ .debug_ranges  0x00000370       0x28 systick.o
 
 .debug_macro
  *(.debug_macro)

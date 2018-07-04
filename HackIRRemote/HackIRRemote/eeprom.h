@@ -12,7 +12,7 @@
 #include "avr/eeprom.h"
 #include "IRremote.h"
 
-#define KEY_FIELD_SIZE 5
+#define KEY_FIELD_SIZE 5 // taille des enregistrements
 
 void saveCode(decode_results *dec_results, uint8_t offset);
 void getCode(decode_results *dec_results, uint8_t offset);
